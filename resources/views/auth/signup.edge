@@ -1,0 +1,92 @@
+@layout('layouts/main')
+
+@section('title')
+  Signup
+@endsection
+
+@section('main')
+
+@set('usernameError', hasErrorFor('username'))
+@set('emailError', hasErrorFor('email'))
+@set('passwordError', hasErrorFor('password'))
+
+<form action="{{ route('UserController.register') }}" method="POST">
+
+  {{ csrfField() }}
+
+  <div style="margin-bottom: 20px;" class="field">
+    <p class="control has-icons-left">
+      <input 
+        class="input {{ usernameError ? "is-danger" : "" }}" 
+        type="text" 
+        name="username" 
+        value="{{ old('username', '') }}" 
+        placeholder="Username"
+      >
+
+      @if(usernameError)
+        <span class="help is-danger">
+          {{ getErrorFor('username') }}
+        </span>
+      @endif
+
+      <span class="icon is-small is-left">
+        <i class="fas fa-envelope"></i>
+      </span>
+    </p>
+  </div>
+
+  <div style="margin-bottom: 20px;" class="field">
+    <p class="control has-icons-left">
+      <input 
+        class="input {{ emailError ? "is-danger" : "" }}" 
+        type="email" 
+        name="email" 
+        value="{{ old('email', '') }}" 
+        placeholder="Email"
+      >
+
+      @if(emailError)
+        <span class="help is-danger">
+          {{ getErrorFor('email') }}
+        </span>
+      @endif
+
+      <span class="icon is-small is-left">
+        <i class="fas fa-envelope"></i>
+      </span>
+    </p>
+  </div>
+
+  <div style="margin-bottom: 20px;" class="field">
+    <p class="control has-icons-left">
+      <input 
+        class="input {{ passwordError ? "is-danger" : "" }}"
+        type="password" 
+        name="password" 
+        value="{{ old('password', '') }}" 
+        placeholder="Password"
+      >
+
+      @if(passwordError)
+        <span class="help is-danger">
+          {{ getErrorFor('password') }}
+        </span>
+      @endif
+
+      <span class="icon is-small is-left">
+        <i class="fas fa-lock"></i>
+      </span>
+    </p>
+  </div>
+
+  <div class="field">
+    <p class="control">
+      <button type="submit" class="button is-success">
+        Join now
+      </button>
+    </p>
+  </div>
+</form>
+
+@endsection

@@ -19,3 +19,17 @@ const Route = use('Route')
 Route.on('/').render('welcome')
 Route.on('/about').render('about')
 
+Route.on('/signup')
+  .render('auth.signup')
+  .middleware(['guest'])
+Route.post('signup', 'UserController.register').validator('CreateUser')
+
+Route.on('/login')
+  .render('auth.login')
+  .middleware(['guest'])
+Route.post('/login', 'UserController.login').validator('LoginUser')
+
+Route.get('/logout', async ({ auth, response }) => {
+  await auth.logout()
+  return response.redirect('/')
+})
