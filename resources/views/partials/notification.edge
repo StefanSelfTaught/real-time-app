@@ -1,0 +1,8 @@
+@if(flashMessage('notification'))
+  <article class="message is-{{ flashMessage('notification.type') }}">
+    <div class="message-header">
+      <p>{{ flashMessage('notification.message') }}</p>
+      <button class="delete" aria-label="delete"></button>
+    </div>
+  </article>
+@endif

@@ -17,19 +17,21 @@
 const Route = use('Route')
 
 Route.on('/').render('welcome')
-Route.on('/about').render('about')
 
-Route.on('/signup')
-  .render('auth.signup')
-  .middleware(['guest'])
-Route.post('signup', 'UserController.register').validator('CreateUser')
+Route.on('/chanel-1').render('channel-1')
+Route.on('/chanel-2').render('channel-2')
 
-Route.on('/login')
-  .render('auth.login')
-  .middleware(['guest'])
-Route.post('/login', 'UserController.login').validator('LoginUser')
+Route.group(() => {
+  Route.on('/signup').render('auth.signup')
+  Route.on('/login').render('auth.login')
+  Route.post('signup', 'UserController.register').validator('CreateUser')
+  Route.post('/login', 'UserController.login').validator('LoginUser')
+}).middleware(['guest'])
 
-Route.get('/logout', async ({ auth, response }) => {
+Route.get('/logout', async ({ response, auth, session }) => {
   await auth.logout()
+  session.flash({
+    notification: { type: 'success', message: 'Logged out successfully!' },
+  })
   return response.redirect('/')
-})
+}).middleware(['auth'])

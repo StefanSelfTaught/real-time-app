@@ -16,6 +16,13 @@ class CreateUser {
     }
   }
 
+
+  get sanitizationRules () {
+    return {
+      email: 'normalize_email',
+    }
+  }
+
   get validateAll () {
     return true
   }

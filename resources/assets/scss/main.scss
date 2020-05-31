@@ -24,13 +24,22 @@ $link: $pink;
 $widescreen-enabled: false;
 $fullhd-enabled: false;
 
-// Update some of Bulma's component variables
+$navbar-box-shadow-size: 15px 15px 10px 0;
+$navbar-box-shadow-color: $beige-lighter;
 $body-background-color: $beige-lighter;
 $control-border-width: 2px;
-$input-border-color: transparent;
+$input-border-color: $beige-lighter;
 $input-shadow: none;
+$input-color: black;
+$input-focus-border-color: $primary;
 
 @import "bulma/bulma.sass";
+
+.chat-message {
+  padding: 10px; 
+  margin: 20px 5px; 
+  border-radius: 10px;
+}
 
 // Import only what you need from Bulma
 // @import "../../../node_modules/bulma/sass/utilities/_all.sass";

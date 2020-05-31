@@ -1,0 +1,23 @@
+<div style="min-height: 80vh;" class="box">
+  <article class="media">
+    <div class="media-content">
+      <div class="content">
+        <div id="messages-container" style="position: absolute; width: 66%; max-height: 520px; overflow: auto;" >
+          @include('partials.chat-message')
+          @include('partials.chat-message')
+          @include('partials.chat-message')
+        </div>
+        <form action="/" id="chat-form" method="GET">
+          <div style="position: relative; top: 530px" class="columns">
+            <div class="column is-10">
+              <input placeholder="Enter message" id="message" type="text" class="input">
+            </div>
+            <div class="column is-2">
+              <button type="submit" class="button is-link">Send</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </article>
+</div>

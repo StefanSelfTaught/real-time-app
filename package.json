@@ -5,7 +5,7 @@
   "description": "The fullstack application boilerplate for Adonisjs",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon server.js",
+    "start": "node server.js",
     "serve": "adonis serve --dev",
     "test": "node ace test",
     "watch": "webpack --config webpack.config.js --watch",
@@ -47,7 +47,6 @@
     "extract-text-webpack-plugin": "^4.0.0-beta.0",
     "file-loader": "^6.0.0",
     "node-sass": "^4.14.1",
-    "nodemon": "^2.0.4",
     "sass-loader": "^8.0.2",
     "style-loader": "^1.2.1",
     "webpack": "^4.43.0",

@@ -1,0 +1,18 @@
+@layout('layouts/chat')
+
+@section('title')
+  About
+@endsection
+
+@section('chat-container')
+
+<div style="margin: 20px 40px;" class="columns">
+  <div class="column is-3">
+    @include('partials/side-menu.edge')
+  </div>
+  <div class="column is-9">
+    @include('partials/chat.edge')
+  </div>
+</div>
+
+@endsection

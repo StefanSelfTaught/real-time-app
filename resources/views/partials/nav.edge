@@ -1,4 +1,4 @@
-<nav class="navbar is-spaced" role="navigation" aria-label="main navigation">
+<nav class="navbar has-shadow is-spaced" role="navigation" aria-label="main navigation">
   <div class="navbar-brand">
     <a class="navbar-item" href="https://bulma.io">
       <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28">
@@ -26,7 +26,12 @@
 
       @loggedIn
          <div class="navbar-item">
-          <p style="margin-right: 17px;">Logged in as <span class="has-text-weight-semibold has-text-primary">{{ auth.user.username }}</span></p>
+          <p style="margin-right: 17px;">
+            Logged in as 
+            <span class="has-text-weight-semibold has-text-primary">
+              {{ auth.user.username }}
+            </span>
+          </p>
           <a href="/logout" class="button is-primary">
             <strong>Log out</strong>
           </a>
