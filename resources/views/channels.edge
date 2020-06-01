@@ -1,0 +1,22 @@
+@layout('layouts/main')
+
+@section('title')
+  Welcome
+@endsection
+
+@section('main')
+
+@include('partials.notification')
+
+@each(channel in channels)
+  <a 
+    style="margin: 50px" 
+    href="{{ route('channels.show', { slug: channel.slug }) }}"
+  >
+    <div class="box">
+      <p>{{ channel.name }}</p>
+    </div>
+  </a>
+@endeach
+
+@endsection

@@ -2,10 +2,10 @@
   <div class="media-content">
     <div class="content">
       <p>
-        <strong>Barbara Middleton</strong>
-        <small>2:52 pm</small>
+        <strong>{{ message.user_username }}</strong>
+        <small>{{ message.created_at }}</small>
         <br>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis porta eros lacus, nec ultricies elit blandit non. Supellentesque mauris sit amet dolor blandit rutrum. Nunc in tempus turpis.
+        {{ message.text }}
         <br>
       </p>
     </div>

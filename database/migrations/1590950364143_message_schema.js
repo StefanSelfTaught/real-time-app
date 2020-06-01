@@ -9,6 +9,7 @@ class MessageSchema extends Schema {
       table.increments()
       table.text('text').notNullable()
       table.integer('user_id').unsigned().references('id').inTable('users')
+      table.string('user_username').notNullable()
       table.integer('channel_id').unsigned().references('id').inTable('channels')
       table.timestamps()
     })

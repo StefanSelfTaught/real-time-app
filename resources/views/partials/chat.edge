@@ -3,17 +3,29 @@
     <div class="media-content">
       <div class="content">
         <div id="messages-container" style="position: absolute; width: 66%; max-height: 520px; overflow: auto;" >
-          @include('partials.chat-message')
-          @include('partials.chat-message')
-          @include('partials.chat-message')
+        @if(messages.length)
+          @each(message in messages)
+            @include('partials.chat-message')
+          @endeach
+        @else
+          <p>No Messages</p>
+        @endif
         </div>
-        <form action="/" id="chat-form" method="GET">
+        <form action="{{ route('MessageController.store') }}" id="chat-form" method="POST">
+          
+          {{ csrfField() }}
+
           <div style="position: relative; top: 530px" class="columns">
             <div class="column is-10">
-              <input placeholder="Enter message" id="message" type="text" class="input">
+              <input placeholder="Enter message" id="message" name="text" type="text" class="input">
             </div>
             <div class="column is-2">
-              <button type="submit" class="button is-link">Send</button>
+              <button type="submit" class="button is-link">
+                <span class="icon">
+                  <i class="fas fa-paper-plane"></i>
+                </span>
+                <span>Send</span>
+              </button>
             </div>
           </div>
         </form>

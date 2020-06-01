@@ -8,18 +8,16 @@
   box-shadow: 0 0.5em 1em -0.125em rgba(10, 10, 10, 0.1), 0 0px 0 1px rgba(10, 10, 10, 0.02);"
 >
   <p class="menu-label">
-    Chanels
+    Channels
   </p>
   <ul class="menu-list">
-    <li><a href="/channel-1">Channel 1</a></li>
-    <li>
-      <a href="/channel-2">Channel 2</a>
-      <ul>
-        <li><a>User 1</a></li>
-        <li><a>User 2</a></li>
-        <li><a>User 3</a></li>
-      </ul>
-    </li>
-    <li><a>Channel 3</a></li>
+    @each(channel in channels)
+      <li>
+        <a 
+          href="{{ route('channels.show', { slug: channel.slug }) }}">
+          {{ channel.name }}
+        </a>
+      </li>
+    @endeach
   </ul>
 </aside>

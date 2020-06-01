@@ -44,7 +44,6 @@ document.addEventListener('DOMContentLoaded', () => {
 */}
 
   chatForm.addEventListener('submit', (event) => {
-    event.preventDefault()
     const message = document.querySelector('#message')
 
     const articleNode = document.createElement('article')
@@ -79,8 +78,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.querySelector('#messages-container').appendChild(articleNode)
 
-    message.value = '';
-    message.focus()
+    // message.value = '';
+    // message.focus()
 
   })
 

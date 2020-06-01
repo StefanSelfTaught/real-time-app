@@ -16,10 +16,14 @@
 /** @type {typeof import('@adonisjs/framework/src/Route/Manager')} */
 const Route = use('Route')
 
-Route.on('/').render('welcome')
+Route.get('/', ({ response }) => {
+  response.redirect('/channels')
+})
 
-Route.on('/chanel-1').render('channel-1')
-Route.on('/chanel-2').render('channel-2')
+Route.get('/channels/:slug', 'ChannelController.show').as('channels.show')
+Route.get('/channels', 'ChannelController.index').as('channels.index')
+
+Route.post('/messages', 'MessageController.store').as('message.store')
 
 Route.group(() => {
   Route.on('/signup').render('auth.signup')

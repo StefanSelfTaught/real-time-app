@@ -9,6 +9,7 @@ class ChannelSchema extends Schema {
       table.increments()
       table.string('name', 255).notNullable().unique()
       table.integer('user_id').unsigned().references('id').inTable('users')
+      table.string('slug').notNullable()
       table.timestamps()
     })
   }
