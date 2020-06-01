@@ -20,16 +20,16 @@
 const cluster = require('cluster')
 const { Ignitor } = require('@adonisjs/ignitor')
 
-// if (cluster.isMaster) {
-//   for (let i = 0; i < 4; i++) {
-//     cluster.fork()
-//   }
-//   require('@adonisjs/websocket/clusterPubSub')()
-//   return
-// }
+if (cluster.isMaster) {
+  for (let i = 0; i < 4; i++) {
+    cluster.fork()
+  }
+  require('@adonisjs/websocket/clusterPubSub')()
+  return
+}
 
 new Ignitor(require('@adonisjs/fold'))
   .appRoot(__dirname)
-  // .wsServer()
+  .wsServer()
   .fireHttpServer()
   .catch(console.error)
