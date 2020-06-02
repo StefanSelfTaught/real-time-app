@@ -2,7 +2,7 @@
   <article class="media">
     <div class="media-content">
       <div class="content">
-        <div id="messages-container" style="position: absolute; width: 66%; max-height: 520px; overflow: auto;" >
+        <div id="messages-container" style="position: absolute; width: 66%; max-height: 520px; overflow-y: auto;" >
         @if(messages.length)
           @each(message in messages)
             @include('partials.chat-message')

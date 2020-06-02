@@ -27,11 +27,11 @@ class ChatController {
   }
 
   onClose () {
-
+    console.log('Closed')
   }
 
   onError () {
-
+    console.log('Error')
   }
 }
 

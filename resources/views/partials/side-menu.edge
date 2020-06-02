@@ -4,7 +4,7 @@
   border-radius: 6px;
   min-height: 80vh;
   max-height: 80vh;
-  overflow: auto; 
+  overflow-y: auto; 
   box-shadow: 0 0.5em 1em -0.125em rgba(10, 10, 10, 0.1), 0 0px 0 1px rgba(10, 10, 10, 0.02);"
 >
   <p class="menu-label">
@@ -14,7 +14,9 @@
     @each(channel in channels)
       <li>
         <a 
-          href="{{ route('channels.show', { slug: channel.slug }) }}">
+          href="{{ route('channels.show', { slug: channel.slug }) }}"
+          class="{{ channelData.name === channel.name ? 'is-active' : '' }}" 
+        >
           {{ channel.name }}
         </a>
       </li>

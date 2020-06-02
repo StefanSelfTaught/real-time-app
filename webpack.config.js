@@ -43,7 +43,7 @@ module.exports = {
   devtool: 'inline-source-map',
   entry: [
     './resources/assets/scss/main.scss',
-    './resources/assets/scripts/app.js',
+    './resources/assets/scripts/index.js',
   ],
   devServer: {
     contentBase: './public',

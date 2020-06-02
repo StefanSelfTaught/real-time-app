@@ -19,7 +19,6 @@ class UserSeeder {
     const channel = await Factory.model('App/Models/Channel').makeMany(5)
 
     await user.channels().saveMany([...channel])
-    await Factory.model('App/Models/User').createMany(4)
   }
 
 }
