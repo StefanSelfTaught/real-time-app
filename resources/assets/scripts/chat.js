@@ -2,11 +2,18 @@ import Ws from '@adonisjs/websocket-client'
 
 let isConnected = false
 let ws = null
+let chat = null
+let isTyping = false
+const messageInput = document.querySelector('#message')
 const chatForm = document.querySelector('#chat-form')
+
+let topic = location.pathname.replace('/channels/', '');
 
 ws = Ws().connect()
 
 ws.on('open', () => {
+
+  console.log('open')
 
   isConnected = true
   subscribeToChannel()
@@ -25,9 +32,7 @@ ws.on('close', () => {
 
 const subscribeToChannel = () => {
 
-  const topic = location.pathname.replace('/channels/', '');
-
-  const chat = ws.subscribe(`chat:${topic}`)
+  chat = ws.subscribe(`chat:${topic}`)
 
   chat.on('error', (error) => {
     console.log('chat error', error)
@@ -70,24 +75,69 @@ const subscribeToChannel = () => {
 
     document.querySelector('#messages-container').appendChild(articleNode)
   })
+
+  chat.on('typing', (userTyping) => {
+
+    const articleNode = document.createElement('article')
+    articleNode.classList.add('chat-message', 'media', 'has-background-light', `typing-${userTyping.replace(/\s/g, '')}`)
+
+    const mediaContentNode = document.createElement('div')
+    mediaContentNode.classList.add('media-content')
+
+    const contentNode = document.createElement('div')
+    contentNode.classList.add('content')
+
+    const paragraphNode = document.createElement('p')
+
+    const messageValue = document.createTextNode(`${userTyping} is typing ...`)
+
+    paragraphNode.appendChild(messageValue)
+
+    contentNode.appendChild(paragraphNode)
+    mediaContentNode.appendChild(contentNode)
+    articleNode.appendChild(mediaContentNode)
+
+    document.querySelector('#messages-container').appendChild(articleNode)
+  })
+
+  chat.on('stopTyping', (userTyping) => {
+    document.querySelector(`.typing-${userTyping}`).remove()
+  })
 }
+
+messageInput.addEventListener('input', (event) => {
+
+  if (!isTyping) {
+    isTyping = true
+    chat.emit('typing')
+  }
+
+  let lastTypingTime = (new Date()).getTime();
+
+  setTimeout(() => {
+    let typingTimer = (new Date()).getTime();
+    let timeDiff = typingTimer - lastTypingTime;
+    if (timeDiff >= 4000 && isTyping) {
+      chat.emit('stopTyping')
+      isTyping = false;
+    }
+  }, 4000);
+})
 
 chatForm.addEventListener('submit', (event) => {
   event.preventDefault()
-  const message = document.querySelector('#message')
 
-  const topic = location.pathname.replace('/channels/', '')
-
-  console.log(message.value.length)
-
-  if (message.value.length)
-    ws.getSubscription(`chat:${topic}`).emit('message', {
-      body: message.value,
+  if (messageInput.value.length)
+    chat.emit('message', {
+      body: messageInput.value,
       channel: topic
   })
 
-  message.value = '';
-  message.focus()
+  chat.emit('stopTyping')
+  isTyping = false;
+
+  messageInput.value = '';
+  messageInput.focus()
 
 })
 

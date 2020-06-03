@@ -4,33 +4,46 @@ const Message = use('App/Models/Message')
 const Channel = use('App/Models/Channel')
 
 class ChatController {
-  constructor ({ socket, request, auth }) {
+  constructor({ socket, request, auth: { user: { username, id } } }) {
     this.socket = socket
     this.request = request
     this.auth = auth
+    this.username = username
+    this.id = id
   }
 
-  async onMessage (message) {
-
-    const { username, id } = this.auth.user
-
+  async onMessage(message) {
     const data = {
       message,
-      username,
+      username: this.username
     }
 
     this.socket.broadcastToAll('message', data)
 
     const channel = await Channel.findBy('slug', message.channel)
 
-    await channel.messages().create({ text: message.body, user_id: id, user_username: username })
+    await channel
+      .messages()
+      .create({
+        text: message.body,
+        user_id: this.id,
+        user_username: this.username
+      })
   }
 
-  onClose () {
+  onTyping() {
+    this.socket.broadcast('typing', this.username)
+  }
+
+  onStopTyping() {
+    this.socket.broadcast('stopTyping', this.username.replace(/\s/g, ''))
+  }
+
+  onClose() {
     console.log('Closed')
   }
 
-  onError () {
+  onError() {
     console.log('Error')
   }
 }

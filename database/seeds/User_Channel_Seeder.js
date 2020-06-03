@@ -16,9 +16,9 @@ const Factory = use('Factory')
 class UserSeeder {
   async run () {
     const user = await Factory.model('App/Models/User').create()
-    const channel = await Factory.model('App/Models/Channel').makeMany(5)
+    const channels = await Factory.model('App/Models/Channel').makeMany(5)
 
-    await user.channels().saveMany([...channel])
+    await user.channels().saveMany([...channels])
   }
 
 }

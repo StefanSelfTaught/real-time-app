@@ -20,10 +20,10 @@ Route.get('/', ({ response }) => {
   response.redirect('/channels')
 })
 
-Route.get('/channels/:slug', 'ChannelController.show').as('channels.show')
 Route.get('/channels', 'ChannelController.index').as('channels.index')
-
-Route.post('/messages', 'MessageController.store').as('message.store')
+Route.get('/channels/:slug', 'ChannelController.show')
+  .as('channels.show')
+  .middleware(['auth'])
 
 Route.group(() => {
   Route.on('/signup').render('auth.signup')
