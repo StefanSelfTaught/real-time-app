@@ -1,0 +1,37 @@
+@layout('layouts/main')
+
+@section('title')
+  My Channels
+@endsection
+
+@section('main')
+
+@if(userChannels.length)
+  @each(userChannel in userChannels)
+    <div class="box">
+      <article style="align-items: center;" class="media">
+        <div class="media-left">
+          <p>{{ userChannel.name }}</p>
+        </div>
+        <div class="media-content"></div>
+        <div class="media-right">
+          <form style="display: inline;" action="{{ '/channels/' + userChannel.id + '?_method=DELETE' }}" method="POST">
+            {{ csrfField() }}
+            <button type="submit" style="margin-right: 5px" class="button is-danger">Delete</button>
+          </form>
+          <button class="button is-info">
+            <a style="color: white;" href="{{ route('channels.edit', { id: userChannel.id }) }}">Edit</a>
+          </button>
+        </div>
+      </article>
+    </div>
+  @endeach
+@else
+  <div>No Channels Created!</div>
+@endif
+
+<button style="margin-top: 15px" class="button is-success">
+  <a style="color: white;" href="{{ route('channels.create') }}">Create Channel</a>
+</button>
+
+@endsection

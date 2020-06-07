@@ -7,12 +7,13 @@
     @!section('title')
   </title>
   {{ style('app') }}
+  <script src="{{ assetsUrl('app.bundle.js') }}" data-turbolinks-suppress-warning defer></script>
 </head>
 <body>
   @include('partials/nav')
 
   @!section('chat-container')
 
-  @include('partials/common-scripts')
+  <script src="{{ assetsUrl('chat.bundle.js') }}" defer></script>
 </body>
 </html>

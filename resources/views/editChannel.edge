@@ -1,0 +1,41 @@
+@layout('layouts/main')
+
+@section('title')
+  Create Channel
+@endsection
+
+@section('main')
+
+<div class="columns is-mobile">
+  <div class="column is-three-fifths is-offset-one-fifth">
+
+    <div class="box"> 
+      <form action="{{ '/channels/' + channelData.id + '?_method=PUT' }}" method="POST">
+
+        {{ csrfField() }}
+
+        <div style="margin-bottom: 20px;" class="field">
+          <label class="label">Name</label>
+            <input 
+              class="input" 
+              type="text" 
+              name="name" 
+              value="{{ channelData.name }}" 
+              placeholder="Channel name"
+            >
+          </p>
+        </div>
+
+        <div class="field">
+          <p class="control">
+            <button type="submit" class="button is-success">
+              Save
+            </button>
+          </p>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+@endsection

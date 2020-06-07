@@ -23,9 +23,14 @@ function scriptRules() {
     {
       test: /\.js$/,
       exclude: [/node_modules/],
-      loader: 'babel-loader',
-      options: { presets: ['@babel/preset-env'] },
-    },
+      use: {
+        loader: 'babel-loader',
+        options: {
+          presets: ['@babel/preset-env'],
+          plugins: ['@babel/plugin-transform-regenerator']
+        }
+      }
+    }
   ]
 }
 
@@ -41,16 +46,16 @@ function imagesRules() {
 module.exports = {
   mode: 'development',
   devtool: 'inline-source-map',
-  entry: [
-    './resources/assets/scss/main.scss',
-    './resources/assets/scripts/index.js',
-  ],
+  entry: {
+    app:'./resources/assets/scripts/index.js',
+    chat:'./resources/assets/scripts/chat.js',
+  },
   devServer: {
     contentBase: './public',
   },
   output: {
     path: path.resolve(__dirname, 'public'),
-    filename: 'app.js',
+    filename: '[name].bundle.js'
   },
   module: {
     rules: sassRules()

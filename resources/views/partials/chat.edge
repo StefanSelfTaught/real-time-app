@@ -7,8 +7,6 @@
           @each(message in messages)
             @include('partials.chat-message')
           @endeach
-        @else
-          <p>No Messages</p>
         @endif
         </div>
         <form action="{{ route('MessageController.store') }}" id="chat-form" method="POST">

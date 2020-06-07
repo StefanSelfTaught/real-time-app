@@ -1,0 +1,40 @@
+@layout('layouts/main')
+
+@section('title')
+  Create Channel
+@endsection
+
+@section('main')
+
+<div class="columns is-mobile">
+  <div class="column is-three-fifths is-offset-one-fifth">
+
+    <div class="box"> 
+      <form action="{{ route('channels.store') }}" method="POST">
+
+        {{ csrfField() }}
+
+        <div style="margin-bottom: 20px;" class="field">
+          <label class="label">Name</label>
+            <input 
+              class="input" 
+              type="text" 
+              name="name" 
+              placeholder="Channel name"
+            >
+          </p>
+        </div>
+
+        <div class="field">
+          <p class="control">
+            <button type="submit" class="button is-success">
+              Create
+            </button>
+          </p>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+@endsection

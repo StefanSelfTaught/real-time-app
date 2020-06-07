@@ -10,4 +10,8 @@ hooks.after.providersBooted(() => {
   Exception.handle('HttpException', async (error, { response }) => {
     return response.redirect('/')
   })
+
+  Exception.handle('ModelNotFoundException', async (error, { response }) => {
+    return response.redirect('/channels')
+  })
 })

@@ -3,6 +3,7 @@
 /** @type {typeof import('@adonisjs/lucid/src/Lucid/Model')} */
 const Model = use('Model')
 const Encryption = use('Encryption')
+const moment = use('moment')
 
 class Message extends Model {
   static boot () {
@@ -15,10 +16,14 @@ class Message extends Model {
 
     this.addHook('afterFetch', async (messageInstance) => {
       messageInstance.forEach(message => {
-        let decryptedText = Encryption.decrypt(message.text)
+        const decryptedText = Encryption.decrypt(message.text)
         message.text = decryptedText
       })
     })
+  }
+
+  getCreatedAt(date) {
+    return moment(date).fromNow()
   }
 
   channel () {

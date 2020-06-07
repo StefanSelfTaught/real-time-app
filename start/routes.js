@@ -20,10 +20,23 @@ Route.get('/', ({ response }) => {
   response.redirect('/channels')
 })
 
+Route.group(() => {
+  Route.get('/myChannels', 'ChannelController.indexUserChannels').as(
+    'channels.indexUserChannels'
+  )
+  Route.get('/channels/create', 'ChannelController.create').as(
+    'channels.create'
+  )
+  Route.post('/channels', 'ChannelController.store').as('channels.store')
+  Route.delete('/channels/:id', 'ChannelController.destroy').as(
+    'channels.destroy'
+  )
+  Route.get('/channels/:id/edit', 'ChannelController.edit').as('channels.edit')
+  Route.put('/channels/:id', 'ChannelController.update').as('channels.update')
+  Route.get('/channels/:slug', 'ChannelController.show').as('channels.show')
+}).middleware(['auth'])
+
 Route.get('/channels', 'ChannelController.index').as('channels.index')
-Route.get('/channels/:slug', 'ChannelController.show')
-  .as('channels.show')
-  .middleware(['auth'])
 
 Route.group(() => {
   Route.on('/signup').render('auth.signup')

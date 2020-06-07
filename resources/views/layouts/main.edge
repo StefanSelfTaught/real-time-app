@@ -7,6 +7,7 @@
     @!section('title')
   </title>
   {{ style('app') }}
+  <script src="{{ assetsUrl('app.bundle.js') }}" data-turbolinks-suppress-warning defer></script>
 </head>
 <body>
   @include('partials/nav')
@@ -18,7 +19,5 @@
   </main>
 
   @!section('chat-container')
-
-  @include('partials/common-scripts')
 </body>
 </html>

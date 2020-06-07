@@ -1,2 +1,4 @@
+import './turbolinks.js'
 import './burgerToggle.js'
-import './chat.js'
+
+import '../scss/main.scss'

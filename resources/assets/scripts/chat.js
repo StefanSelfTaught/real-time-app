@@ -1,3 +1,4 @@
+import "regenerator-runtime/runtime.js";
 import Ws from '@adonisjs/websocket-client'
 
 let isConnected = false
@@ -6,6 +7,9 @@ let chat = null
 let isTyping = false
 const messageInput = document.querySelector('#message')
 const chatForm = document.querySelector('#chat-form')
+const messagesContainer = document.querySelector('#messages-container')
+
+messagesContainer.scrollTop = messagesContainer.scrollHeight
 
 let topic = location.pathname.replace('/channels/', '');
 
@@ -34,12 +38,18 @@ const subscribeToChannel = () => {
 
   chat = ws.subscribe(`chat:${topic}`)
 
+  chat.on('ready', () => {
+    chat.emit('connected')
+  })
+
   chat.on('error', (error) => {
     console.log('chat error', error)
   })
 
   chat.on('close', () => {
     console.log('chat close')
+
+    chat.close()
   })
 
   chat.on('message', (message) => {
@@ -61,7 +71,7 @@ const subscribeToChannel = () => {
     const messageValue = document.createTextNode(message.message.body)
 
     strongNode.innerHTML = message.username + ' '
-    smallNode.innerHTML = '2:50 pm'
+    smallNode.innerHTML = message.deliveredAt
 
     paragraphNode.appendChild(strongNode)
     paragraphNode.appendChild(smallNode)
@@ -73,7 +83,9 @@ const subscribeToChannel = () => {
     mediaContentNode.appendChild(contentNode)
     articleNode.appendChild(mediaContentNode)
 
-    document.querySelector('#messages-container').appendChild(articleNode)
+    messagesContainer.appendChild(articleNode)
+
+    messagesContainer.scrollTop = messagesContainer.scrollHeight
   })
 
   chat.on('typing', (userTyping) => {
@@ -97,7 +109,9 @@ const subscribeToChannel = () => {
     mediaContentNode.appendChild(contentNode)
     articleNode.appendChild(mediaContentNode)
 
-    document.querySelector('#messages-container').appendChild(articleNode)
+    messagesContainer.appendChild(articleNode)
+
+    messagesContainer.scrollTop = messagesContainer.scrollHeight
   })
 
   chat.on('stopTyping', (userTyping) => {
