@@ -2,7 +2,6 @@
 
 const Message = use('App/Models/Message')
 const Channel = use('App/Models/Channel')
-const Ws = use('Ws')
 
 class ChatController {
   constructor({ socket, request, auth: { user: { username, id } } }) {
@@ -12,10 +11,9 @@ class ChatController {
     this.id = id
   }
 
-  async onConnected () {
-    const topic = Ws.getChannel('chat').topic('otool')
-
-    console.log(topic)
+  onConnected () {
+    console.log('connected')
+    console.log(this.socket)
   }
 
   async onMessage(message) {

@@ -1,4 +1,4 @@
-import "regenerator-runtime/runtime.js";
+import 'regenerator-runtime/runtime.js'
 import Ws from '@adonisjs/websocket-client'
 
 let isConnected = false
@@ -48,8 +48,6 @@ const subscribeToChannel = () => {
 
   chat.on('close', () => {
     console.log('chat close')
-
-    chat.close()
   })
 
   chat.on('message', (message) => {

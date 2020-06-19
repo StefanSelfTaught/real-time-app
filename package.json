@@ -9,7 +9,7 @@
     "serve": "adonis serve --dev",
     "test": "node ace test",
     "watch": "webpack --config webpack.config.js --watch",
-    "webpack": "webpack --config webpack.config.js"
+    "webpack": "webpack --config webpack.config.js -p"
   },
   "keywords": [
     "adonisjs",
