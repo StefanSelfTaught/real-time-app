@@ -36,7 +36,8 @@
     "@adonisjs/websocket-client": "^1.0.9",
     "@fortawesome/fontawesome-free": "^5.13.0",
     "mysql": "^2.18.1",
-    "turbolinks": "^5.2.0"
+    "turbolinks": "^5.2.0",
+    "url-parse": "^1.4.7"
   },
   "devDependencies": {
     "@babel/core": "^7.10.0",
